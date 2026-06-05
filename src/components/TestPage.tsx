@@ -2,15 +2,15 @@
 import { useState } from "react";
 import type { Test } from "../types/index";
 
-// import MultipleChoice from "./questions/MultipleChoice"
 import QuestionList from "./QuestionList"
+import Timer from "./Timer"
 
 interface TestPageProps {
     test: Test
 }
             
 // props are values you pass into a component
-//comon syntax: function FuncName(variableName: variableType), then you access it 
+// common syntax: function FuncName(variableName: variableType), then you access it 
 // writting {variableAttribute} : VariableType enable calling the attribute directly
 function TestPage({ test }: TestPageProps) {
     //basically creates a variable called CurrentSection and creates a
@@ -19,12 +19,17 @@ function TestPage({ test }: TestPageProps) {
     // and useState(0) means this variable is a number
     const [currentSection, setCurrentSection] = useState(0)
 
+    function handleTimeUp() {
+        console.log("time is up!")
+    }
+
     return (
         <div className="test-page">
             
         {/*Header*/}
         <header className="test-header">
-            <span>Timer</span>
+            {/* the two parameters for the timer */}
+            <Timer totalSeconds={3600} onTimeUp={handleTimeUp} />
         </header>
 
             {/* Section name */}
