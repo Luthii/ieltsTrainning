@@ -1,11 +1,11 @@
 import { useState } from "react";
-import type { Question } from "../../types/index";
+import type { QuestionProps } from "../../types/index";
 
-interface ShortAnswerProps {
-    question: Question
-}
+// interface ShortAnswerProps {
+//     question: Question
+// }
 
-function ShortAnswer({question} : ShortAnswerProps) {
+function ShortAnswer({question, onAnswer} : QuestionProps) {
         const [answerGiven, setAnswerGiven] = useState<string>("")
     return (
         <div>
@@ -15,7 +15,10 @@ function ShortAnswer({question} : ShortAnswerProps) {
                 <input type="text" 
                     value={answerGiven}
                     placeholder={"type your answer here"}
-                    onChange={(e) => setAnswerGiven(e.target.value)} 
+                    onChange={(e) => {
+                        setAnswerGiven(e.target.value)
+                        onAnswer(question.id, e.target.value)
+                    }} 
                 />
             </div>
         </div>

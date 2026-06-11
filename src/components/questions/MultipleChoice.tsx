@@ -1,11 +1,11 @@
 import { useState } from "react";
-import type { Question } from "../../types/index";
+import type { QuestionProps } from "../../types/index";
 
-interface MultipleChoiceProps {
-  question: Question
-}
+// interface MultipleChoiceProps {
+//   question: Question
+// }
 
-function MultipleChoice({question} : MultipleChoiceProps) {
+function MultipleChoice({question, onAnswer} : QuestionProps) {
     const [selectedAnswer, setSelectedAnswer] = useState<string>("")
 
 
@@ -19,7 +19,10 @@ function MultipleChoice({question} : MultipleChoiceProps) {
                             name={question.id.toString()} //groups all elements together
                             value={option}
                             checked={selectedAnswer === option} //checks if the selectedAnswer is the option, if yes, shows the radio bt selected
-                            onChange={() => setSelectedAnswer(option)}/>
+                            onChange={() => {
+                                setSelectedAnswer(option)
+                                onAnswer(question.id, option)
+                                }}/>
                     <label>{option}</label>
                 </div>
             ))}

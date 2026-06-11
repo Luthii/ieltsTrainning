@@ -24,10 +24,22 @@ export interface Question {
     answer: string
 }
 
-export interface Test {
+export interface QuestionProps {
+    question: Question
+    //this is an "event"
+    //        parameters                              return
+    onAnswer: (questionId: number, answer: string) => void
+}
+
+export interface Section {
     id: number
     passage: Passage
     questions: Question[]
+}
+
+export interface Test {
+    id: number
+    sections: Section[]
 }
 
 export interface UserAnswer {

@@ -1,11 +1,12 @@
 import { useState } from "react";
-import type { Question } from "../../types/index";
+import type { QuestionProps } from "../../types/index";
 
-interface MatchingInformationProps {
-  question: Question
-}
+// interface MatchingInformationProps {
+//   question: Question
 
-function MatchingInformation({question} : MatchingInformationProps) {
+// }
+
+function MatchingInformation({question, onAnswer} : QuestionProps) {
     const [selectedAnswer, setSelectedAnswer] = useState<string>("")
 
     return (
@@ -13,7 +14,10 @@ function MatchingInformation({question} : MatchingInformationProps) {
             <p>{question.question}</p>
             <select
                 value={selectedAnswer}
-                onChange={(e) => setSelectedAnswer(e.target.value)}
+                onChange={(e) => {
+                    setSelectedAnswer(e.target.value)
+                    onAnswer(question.id, e.target.value)
+                }}
             >
             {question.options?.map((option) => (
                 //key is for react

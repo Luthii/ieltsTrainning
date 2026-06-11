@@ -1,11 +1,11 @@
 import { useState } from "react";
-import type { Question } from "../../types/index";
+import type { QuestionProps } from "../../types/index";
 
-interface TrueFalseNotGivenProps {
-  question: Question
-}
+// interface TrueFalseNotGivenProps {
+//   question: Question
+// }
 
-function TrueFalseNotGiven({question} : TrueFalseNotGivenProps) {
+function TrueFalseNotGiven({question, onAnswer} : QuestionProps) {
     const [selectedAnswer, setSelectedAnswer] = useState<string>("")
 
     return (
@@ -18,7 +18,10 @@ function TrueFalseNotGiven({question} : TrueFalseNotGivenProps) {
                             name={question.id.toString()} //groups all elements together
                             value={option}
                             checked={selectedAnswer === option} //checks if the selectedAnswer is the option, if yes, shows the radio bt selected
-                            onChange={() => setSelectedAnswer(option)}/>
+                            onChange={() => {
+                                setSelectedAnswer(option)
+                                onAnswer(question.id, option)
+                            }}/>
                     <label>{option}</label>
                 </div>
             ))}

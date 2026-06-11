@@ -1,11 +1,11 @@
 import { useState } from "react";
-import type { Question } from "../../types/index";
+import type { QuestionProps } from "../../types/index";
 
-interface SetenceCompeltionProps {
-    question: Question
-}
+// interface SetenceCompeltionProps {
+//     question: Question
+// }
 
-function SentenceCompeltion({question} : SetenceCompeltionProps) {
+function SentenceCompeltion({question, onAnswer} : QuestionProps) {
         const [answerGiven, setAnswerGiven] = useState<string>("")
     return (
         <div>
@@ -15,7 +15,10 @@ function SentenceCompeltion({question} : SetenceCompeltionProps) {
                 <input type="text" 
                     value={answerGiven}
                     placeholder={"type your answer here"}
-                    onChange={(e) => setAnswerGiven(e.target.value)} 
+                    onChange={(e) => {
+                        setAnswerGiven(e.target.value)
+                        onAnswer(question.id, e.target.value)
+                    }} 
                 />
             </div>
         </div>
